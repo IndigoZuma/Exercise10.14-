@@ -1,0 +1,67 @@
+import java.util.GregorianCalendar;
+
+public class Exercise10_14 {
+    public static void main(String[] args) {
+        // Create two MyDate objects as specified
+        MyDate date1 = new MyDate();
+        MyDate date2 = new MyDate(34355555133101L);
+        
+        // Display their year, month, and day
+        System.out.println("Date1: Year = " + date1.getYear() + 
+                          ", Month = " + date1.getMonth() + 
+                          ", Day = " + date1.getDay());
+        
+        System.out.println("Date2: Year = " + date2.getYear() + 
+                          ", Month = " + date2.getMonth() + 
+                          ", Day = " + date2.getDay());
+    }
+}
+
+class MyDate {
+    // Data fields for year, month (0-based), and day
+    private int year;
+    private int month;  // 0-based: 0 for January, 1 for February, etc.
+    private int day;
+    
+    // No-arg constructor that creates a MyDate object for the current date
+    public MyDate() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        this.year = calendar.get(GregorianCalendar.YEAR);
+        this.month = calendar.get(GregorianCalendar.MONTH);  // Already 0-based
+        this.day = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+    }
+    
+    // Constructor with specified elapsed time since midnight, January 1, 1970
+    public MyDate(long elapsedTime) {
+        setDate(elapsedTime);
+    }
+    
+    // Constructor with specified year, month, and day
+    public MyDate(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
+    
+    // Getter methods for data fields
+    public int getYear() {
+        return year;
+    }
+    
+    public int getMonth() {
+        return month;
+    }
+    
+    public int getDay() {
+        return day;
+    }
+    
+    // Method to set new date using elapsed time
+    public void setDate(long elapsedTime) {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTimeInMillis(elapsedTime);
+        this.year = calendar.get(GregorianCalendar.YEAR);
+        this.month = calendar.get(GregorianCalendar.MONTH);  // Already 0-based
+        this.day = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+    }
+}
